@@ -1,0 +1,36 @@
+﻿<Window x:Class="Example.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Example"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="525">
+    <Window.Resources>
+        <local:param x:Key="MyPar1" name="Начальное значение давления пара" value="26"/>
+        <local:param x:Key="MyPar2" name="Начальное значение температуры пара" value="560"/>
+        <local:param x:Key="MyPar3" name="Температура питательной воды" value="272"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition ></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button x:Name="Button1" Grid.Row="4" Content="Сформировать" Width="90" Height="30" IsDefault="True" Click="Button1_Click" />
+        <StackPanel Grid.Row="0" Margin="10 10 0 0">
+            <Label x:Name="TB1" Content="Выберите вид топлива:"/>
+            <RadioButton GroupName="Часть 1" Content="Природный газ"  Margin="5"/>
+           <RadioButton GroupName="Часть 1" Content="Уголь"  Margin="5" />
+           <RadioButton GroupName="Часть 1" Content="Мазут"  Margin="5" />
+        </StackPanel>
+        <Label Content="Выберите параметр, который будет известен:" Grid.Row="1" HorizontalAlignment="Center"/>
+        <ComboBox x:Name="comboBox" Grid.Row="1"  Height="30" Width="250" >
+            <ComboBoxItem Content="{Binding Source={StaticResource MyPar1}, Path=name}"/>
+            <ComboBoxItem Content="{Binding Source={StaticResource MyPar2}, Path=name}"/>
+            <ComboBoxItem Content="{Binding Source={StaticResource MyPar3}, Path=name}"/>
+        </ComboBox>
+    </Grid>
+    
+</Window>
