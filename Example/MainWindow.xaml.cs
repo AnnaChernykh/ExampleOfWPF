@@ -13,32 +13,33 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Example
-{public class param
-        {
-            public string name { get; set; }
-            public double value { get; set; }
-        }
-    
+{    
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+        string RBCH; //- переменная, в которую записыается выбранный рэдиобаттон
         
         public MainWindow()
         {
             InitializeComponent();
-            
-            
+            DataContext = new ApplicationViewModel();
+
+
         }
         private void Button1_Click(object sender, RoutedEventArgs e)
+        {            
+            string vveden = comboBox.Text.ToString();
+            MessageBox.Show("Вид топлива:"+ RBCH + "\nИзвестный параметр: "+vveden+" = "+TextBox1.Text);
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            //надо, чтоб цеплял и имя, и значение
-            ComboBoxItem selectedItem = (ComboBoxItem)comboBox.SelectedItem;
-            string s = (selectedItem.Content.ToString());
-            MessageBox.Show("Empty!"+s);
+            RadioButton pressed = (RadioButton)sender;
+            RBCH=(pressed.Content.ToString());
         }
 
         

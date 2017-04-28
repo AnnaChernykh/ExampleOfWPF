@@ -6,11 +6,7 @@
         xmlns:local="clr-namespace:Example"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="525">
-    <Window.Resources>
-        <local:param x:Key="MyPar1" name="Начальное значение давления пара" value="26"/>
-        <local:param x:Key="MyPar2" name="Начальное значение температуры пара" value="560"/>
-        <local:param x:Key="MyPar3" name="Температура питательной воды" value="272"/>
-    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -19,18 +15,25 @@
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
         <Button x:Name="Button1" Grid.Row="4" Content="Сформировать" Width="90" Height="30" IsDefault="True" Click="Button1_Click" />
-        <StackPanel Grid.Row="0" Margin="10 10 0 0">
+        <StackPanel Grid.Row="0" Margin="10 10 0 0"  >
             <Label x:Name="TB1" Content="Выберите вид топлива:"/>
-            <RadioButton GroupName="Часть 1" Content="Природный газ"  Margin="5"/>
-           <RadioButton GroupName="Часть 1" Content="Уголь"  Margin="5" />
-           <RadioButton GroupName="Часть 1" Content="Мазут"  Margin="5" />
+            <RadioButton GroupName="Часть 1" Content="Природный газ"  Margin="5" Checked="RadioButton_Checked" />
+            <RadioButton GroupName="Часть 1" Content="Уголь"  Margin="5" Checked="RadioButton_Checked" />
+           <RadioButton GroupName="Часть 1" Content="Мазут"  Margin="5" Checked="RadioButton_Checked" />
         </StackPanel>
-        <Label Content="Выберите параметр, который будет известен:" Grid.Row="1" HorizontalAlignment="Center"/>
-        <ComboBox x:Name="comboBox" Grid.Row="1"  Height="30" Width="250" >
-            <ComboBoxItem Content="{Binding Source={StaticResource MyPar1}, Path=name}"/>
-            <ComboBoxItem Content="{Binding Source={StaticResource MyPar2}, Path=name}"/>
-            <ComboBoxItem Content="{Binding Source={StaticResource MyPar3}, Path=name}"/>
-        </ComboBox>
+        
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Content="Выберите параметр, который будет известен:"  HorizontalAlignment="Left" Margin="10 0 0 0" Grid.Row="0"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <ComboBox x:Name="comboBox"  Margin="10 0 0 0" Height="30" Width="250" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" ItemsSource="{Binding Parametrs}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedParam}"/>
+                <TextBox x:Name="TextBox1" Grid.Row="1" Width="80" Margin="10 0 0 0" Height="30" DataContext="{Binding SelectedParam}" VerticalAlignment="Top" Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" >           
+            </TextBox> 
+            </StackPanel>
+        </Grid>
     </Grid>
     
 </Window>
